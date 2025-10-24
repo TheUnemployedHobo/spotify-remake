@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 
+import "./globals.css"
 import { Outfit } from "next/font/google"
 
-import "./globals.css"
-import { ThemeProvider } from "@/components/helpers/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider"
 
 const font = Outfit({
   display: "fallback",
