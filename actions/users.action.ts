@@ -1,6 +1,6 @@
 "use server"
 
-import { auth } from "@/lib/auth"
+import auth from "@/lib/auth"
 
 export const userSignUp = async (f: FormData) => {
   const email = f.get("email") as string

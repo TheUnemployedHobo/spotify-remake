@@ -2,15 +2,18 @@
 
 import { Settings } from "lucide-react"
 
-import { Button } from "../ui/button"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
+
+import TopBarDeleteAccount from "./topbar-delete-acc"
+import TopBarEditCredits from "./topbar-edit-credits"
+import TopBarLogOut from "./topbar-log-out"
 
 function AppTopBarSettings() {
   return (
@@ -23,9 +26,9 @@ function AppTopBarSettings() {
       <DropdownMenuContent className="rounded-xs">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem variant="default">Edit credentials</DropdownMenuItem>
-        <DropdownMenuItem variant="destructive">Delete account</DropdownMenuItem>
-        <DropdownMenuItem variant="destructive">Sign out</DropdownMenuItem>
+        <TopBarEditCredits />
+        <TopBarDeleteAccount />
+        <TopBarLogOut />
       </DropdownMenuContent>
     </DropdownMenu>
   )
