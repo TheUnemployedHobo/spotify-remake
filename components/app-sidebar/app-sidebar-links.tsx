@@ -1,3 +1,5 @@
+"use client"
+
 import { Compass, Heart, House, ListMusic } from "lucide-react"
 
 const appSidebarLinks = [

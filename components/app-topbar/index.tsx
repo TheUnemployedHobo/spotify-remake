@@ -1,12 +1,10 @@
 "use client"
 
-import dynamic from "next/dynamic"
 import Link from "next/link"
 
-import AppLogo from "../app-logo"
+import AppLogo from "../others/app-logo"
 import AppTopBarNavigation from "./app-topbar-navigation"
-
-const AppTopBarProfile = dynamic(() => import("./app-topbar-profile"), { ssr: false })
+import AppTopBarRightOptions from "./app-topbar-right-options"
 
 function AppTopBar() {
   return (
@@ -17,7 +15,7 @@ function AppTopBar() {
         </Link>
         <AppTopBarNavigation />
       </div>
-      <AppTopBarProfile />
+      <AppTopBarRightOptions />
     </div>
   )
 }

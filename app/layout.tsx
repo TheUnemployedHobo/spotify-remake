@@ -3,7 +3,8 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { Outfit } from "next/font/google"
 
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/others/theme-provider"
+import { Toaster } from "@/components/ui/sonner"
 
 const font = Outfit({
   display: "fallback",
@@ -27,6 +28,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark">
           {children}
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   )
