@@ -1,13 +1,14 @@
 "use client"
 
 import { LogOut } from "lucide-react"
+import { redirect } from "next/navigation"
 import { toast } from "sonner"
 
 import AlertDialog from "@/components/dialogs/alert-dialog"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import authClient from "@/lib/auth-client"
 
-function TopBarLogOut() {
+function TopBarSignOut() {
   const handleAction = async () => {
     await authClient.signOut({
       fetchOptions: {
@@ -16,6 +17,7 @@ function TopBarLogOut() {
         },
         onSuccess() {
           toast.success("You have been signed out")
+          redirect("/signin")
         },
       },
     })
@@ -35,4 +37,4 @@ function TopBarLogOut() {
   )
 }
 
-export default TopBarLogOut
+export default TopBarSignOut

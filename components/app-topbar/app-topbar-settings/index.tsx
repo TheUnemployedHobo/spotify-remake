@@ -13,7 +13,7 @@ import {
 
 import TopBarDeleteAccount from "./topbar-delete-acc"
 import TopBarEditCredits from "./topbar-edit-credits"
-import TopBarLogOut from "./topbar-log-out"
+import TopBarSignOut from "./topbar-sign-out"
 
 function AppTopBarSettings() {
   return (
@@ -28,7 +28,7 @@ function AppTopBarSettings() {
         <DropdownMenuSeparator />
         <TopBarEditCredits />
         <TopBarDeleteAccount />
-        <TopBarLogOut />
+        <TopBarSignOut />
       </DropdownMenuContent>
     </DropdownMenu>
   )
