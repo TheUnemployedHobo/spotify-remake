@@ -2,25 +2,36 @@
 
 import Form from "next/form"
 import Link from "next/link"
-import { redirect } from "next/navigation"
 import { toast } from "sonner"
 
-import { userSignIn } from "@/actions/users.action"
 import SubmitButton from "@/components/others/submit-button"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import authClient from "@/lib/auth-client"
 
 export default function Page() {
   const handleAction = async (f: FormData) => {
-    if (await userSignIn(f)) {
-      toast.success("Signed in successfully!")
-      redirect("/")
-    }
+    const email = f.get("email") as string
+    const password = f.get("password") as string
+    const remember = f.get("remember") as string
 
-    toast.error("Failed to sign in. Please check your credentials and try again.")
+    await authClient.signIn.email({
+      callbackURL: "/",
+      email,
+      fetchOptions: {
+        onError() {
+          toast.error("Failed to sign in. Please check your credentials and try again")
+        },
+        onSuccess() {
+          toast.success("Signed in successfully!")
+        },
+      },
+      password,
+      rememberMe: Boolean(remember),
+    })
   }
 
   return (

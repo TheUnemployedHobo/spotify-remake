@@ -1,7 +1,12 @@
-import { getSessionCookie } from "better-auth/cookies"
 import { type NextRequest, NextResponse, type ProxyConfig } from "next/server"
 
-export async function proxy(request: NextRequest) {
+import auth from "./lib/auth"
+
+export async function proxy(req: NextRequest) {
+  const session = await auth.api.getSession({ headers: req.headers })
+
+  console.log(session)
+
   return NextResponse.next()
 }
 

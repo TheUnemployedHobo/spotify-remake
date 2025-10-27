@@ -2,29 +2,37 @@
 
 import Form from "next/form"
 import Link from "next/link"
-import { redirect } from "next/navigation"
 import { toast } from "sonner"
 
-import { userSignUp } from "@/actions/users.action"
 import SubmitButton from "@/components/others/submit-button"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import authClient from "@/lib/auth-client"
 
 export default function Page() {
   const handleAction = async (f: FormData) => {
-    if (f.get("password") !== f.get("repass")) {
-      toast.error("Passwords do not match")
-      return
-    }
+    const email = f.get("email") as string
+    const password = f.get("password") as string
+    const repass = f.get("repass") as string
 
-    if (await userSignUp(f)) {
-      toast.success("Account created successfully")
-      redirect("/signin")
-    }
-
-    toast.error("Error creating account")
+    if (password !== repass) toast.error("Passwords do not match")
+    else
+      //@ts-expect-error no need for name & image
+      authClient.signUp.email({
+        callbackURL: "/signin",
+        email,
+        fetchOptions: {
+          onError() {
+            toast.error("Error creating account")
+          },
+          onSuccess() {
+            toast.success("Account created successfully")
+          },
+        },
+        password,
+      })
   }
 
   return (
