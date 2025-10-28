@@ -1,5 +1,6 @@
 import { integer, pgTable, serial, varchar } from "drizzle-orm/pg-core"
 
+import { user } from "./auth.schema"
 import { songs } from "./song.schema"
 
 export const playlistInfo = pgTable("playlist_info", {
@@ -7,7 +8,9 @@ export const playlistInfo = pgTable("playlist_info", {
   id: serial("id").primaryKey(),
   img: varchar("img"),
   title: varchar("title").notNull(),
-  user_id: varchar("user_id").notNull(),
+  user_id: varchar("user_id")
+    .notNull()
+    .references(() => user.id),
 })
 
 export const playlists = pgTable("playlists", {
