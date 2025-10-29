@@ -5,6 +5,7 @@ import { genres } from "./schema/genre.schema"
 import { likedSongs } from "./schema/liked.schema"
 import { playlistInfo, playlists } from "./schema/playlists.schema"
 import { songs } from "./schema/song.schema"
+import { users } from "./schema/user.schema"
 
 export const songsRelations = relations(songs, ({ one }) => ({
   artist: one(artists, {
@@ -41,4 +42,9 @@ export const likedSongsRelations = relations(likedSongs, ({ one }) => ({
     fields: [likedSongs.song_id],
     references: [songs.id],
   }),
+}))
+
+export const usersRelations = relations(users, ({ many }) => ({
+  likedSongs: many(likedSongs),
+  playlists: many(playlistInfo),
 }))
