@@ -10,6 +10,13 @@ const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "pg", schema: { account, session, user, verification } }),
   emailAndPassword: { autoSignIn: false, enabled: true },
   plugins: [nextCookies()],
+  session: {
+    disableSessionRefresh: false,
+    expiresIn: 60 * 60 * 24 * 7,
+    freshAge: 60 * 60 * 24,
+    storeSessionInDatabase: true,
+    updateAge: 60 * 60 * 1,
+  },
   user: { deleteUser: { enabled: true } },
 })
 

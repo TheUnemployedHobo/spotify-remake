@@ -2,6 +2,7 @@
 
 import Form from "next/form"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 import { toast } from "sonner"
 
 import SubmitButton from "@/components/others/submit-button"
@@ -20,7 +21,7 @@ export default function Page() {
     if (password !== repass) toast.error("Passwords do not match")
     else
       //@ts-expect-error no need for name & image
-      authClient.signUp.email({
+      await authClient.signUp.email({
         callbackURL: "/signin",
         email,
         fetchOptions: {
