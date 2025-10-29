@@ -14,25 +14,26 @@ import authClient from "@/lib/auth-client"
 
 export default function Page() {
   const handleAction = async (f: FormData) => {
-    const email = f.get("email") as string
+    const username = f.get("username") as string
     const password = f.get("password") as string
     const repass = f.get("repass") as string
 
     if (password !== repass) toast.error("Passwords do not match")
     else
-      //@ts-expect-error no need for name & image
       await authClient.signUp.email({
-        callbackURL: "/signin",
-        email,
+        email: "admin@gmail.com",
         fetchOptions: {
           onError() {
             toast.error("Error creating account")
           },
           onSuccess() {
             toast.success("Account created successfully")
+            redirect("/signin")
           },
         },
+        name: "",
         password,
+        username,
       })
   }
 
@@ -41,12 +42,12 @@ export default function Page() {
       <Card className="w-full rounded-xs sm:w-96">
         <CardHeader>
           <CardTitle>Create an account</CardTitle>
-          <CardDescription>Create an account and get started.</CardDescription>
+          <CardDescription>Create an account and get started</CardDescription>
         </CardHeader>
         <CardContent className="space-y-5">
           <Label className="block space-y-2">
-            <span className="block">Email</span>
-            <Input name="email" placeholder="admin@example.com" required type="email" />
+            <span className="block">Username</span>
+            <Input name="username" placeholder="admin" required type="text" />
           </Label>
           <Label className="block space-y-2">
             <span className="block">Password</span>
