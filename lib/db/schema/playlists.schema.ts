@@ -8,7 +8,7 @@ export const playlistInfo = pgTable("playlist_info", {
   id: serial("id").primaryKey(),
   img: varchar("img"),
   title: varchar("title").notNull(),
-  user_id: varchar("user_id")
+  user_id: integer("user_id")
     .notNull()
     .references(() => users.id),
 })
