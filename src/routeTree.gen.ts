@@ -9,50 +9,90 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as baseLayoutRouteImport } from './routes/(base)/_layout'
+import { Route as authLayoutRouteImport } from './routes/(auth)/_layout'
+import { Route as baseLayoutIndexRouteImport } from './routes/(base)/_layout.index'
 
-const IndexRoute = IndexRouteImport.update({
+const baseLayoutRoute = baseLayoutRouteImport.update({
+  id: '/(base)/_layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authLayoutRoute = authLayoutRouteImport.update({
+  id: '/(auth)/_layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const baseLayoutIndexRoute = baseLayoutIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => baseLayoutRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof baseLayoutIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof baseLayoutIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/(auth)/_layout': typeof authLayoutRoute
+  '/(base)/_layout': typeof baseLayoutRouteWithChildren
+  '/(base)/_layout/': typeof baseLayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
   to: '/'
-  id: '__root__' | '/'
+  id: '__root__' | '/(auth)/_layout' | '/(base)/_layout' | '/(base)/_layout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  authLayoutRoute: typeof authLayoutRoute
+  baseLayoutRoute: typeof baseLayoutRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/(base)/_layout': {
+      id: '/(base)/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof baseLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/_layout': {
+      id: '/(auth)/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof authLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(base)/_layout/': {
+      id: '/(base)/_layout/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof baseLayoutIndexRouteImport
+      parentRoute: typeof baseLayoutRoute
     }
   }
 }
 
+interface baseLayoutRouteChildren {
+  baseLayoutIndexRoute: typeof baseLayoutIndexRoute
+}
+
+const baseLayoutRouteChildren: baseLayoutRouteChildren = {
+  baseLayoutIndexRoute: baseLayoutIndexRoute,
+}
+
+const baseLayoutRouteWithChildren = baseLayoutRoute._addFileChildren(
+  baseLayoutRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  authLayoutRoute: authLayoutRoute,
+  baseLayoutRoute: baseLayoutRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
