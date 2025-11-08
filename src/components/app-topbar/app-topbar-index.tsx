@@ -1,19 +1,15 @@
-"use client"
+import { Link } from "@tanstack/react-router"
 
-import dynamic from "next/dynamic"
-import Link from "next/link"
-
-import AppLogo from "./app-logo"
+import AppLogo from "../others/app-logo"
 import AppTopBarNavigation from "./app-topbar-navigation"
-
-const AppTopBarThemeSwitcher = dynamic(() => import("./app-topbar-theme-switcher"), { ssr: false })
-const AppTopBarSettings = dynamic(() => import("./topbar-settings-index"), { ssr: false })
+import AppTopBarThemeSwitcher from "./app-topbar-theme-switcher"
+import AppTopBarSettings from "./topbar-settings-index"
 
 function AppTopBar() {
   return (
     <section className="border-border bg-sidebar flex h-24 items-center justify-between border px-4">
       <div className="flex items-center gap-x-10">
-        <Link href="/">
+        <Link to="/">
           <AppLogo />
         </Link>
         <AppTopBarNavigation />

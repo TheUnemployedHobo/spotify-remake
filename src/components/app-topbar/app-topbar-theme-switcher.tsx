@@ -1,9 +1,7 @@
-"use client"
-
 import { Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
 
-import { Button } from "./ui/button"
+import { useTheme } from "@/components/others/theme-provider"
+import { Button } from "@/components/ui/button"
 
 function AppTopBarThemeSwitcher() {
   const { setTheme, theme } = useTheme()

@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
 import react from "@vitejs/plugin-react-swc"
 import path from "path"
@@ -11,6 +12,7 @@ export default defineConfig({
       target: "react",
     }),
     react(),
+    tailwindcss(),
   ],
   resolve: {
     alias: {

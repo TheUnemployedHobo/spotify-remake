@@ -1,36 +1,24 @@
 "use client"
 
 import { UserPen } from "lucide-react"
-import Form from "next/form"
-import { redirect } from "next/navigation"
-import { useState } from "react"
-import { toast } from "sonner"
+import { Activity, useState } from "react"
 
-import { userEditCredits } from "@/actions/user.action"
-import RegularDialog from "@/components/regular-dialog"
-import SubmitButton from "@/components/submit-button"
+import RegularDialog from "@/components/dialogs/regular-dialog"
+import SubmitButton from "@/components/others/submit-button"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { deleteCookie } from "@/lib/utils"
+
+import { Button } from "../ui/button"
+import { Spinner } from "../ui/spinner"
 
 function TopBarEditCredits() {
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleAction = async (f: FormData) => {
-    if (await userEditCredits(f)) {
-      toast.success("Your credentials have been updated. Please sign in again.")
-      deleteCookie("token")
-      redirect("/signin")
-    }
-
-    toast.error("Failed to update credentials. Please try again.")
-  }
-
   return (
     <RegularDialog
       content={
-        <Form action={handleAction} className="grow space-y-5">
+        <form className="grow space-y-5">
           <Label className="block space-y-2">
             <span className="block">New username</span>
             <Input name="username" placeholder="admin@example.com" type="text" />
@@ -43,8 +31,13 @@ function TopBarEditCredits() {
             <span className="block">New password</span>
             <Input name="password" placeholder="admin1234" type="password" />
           </Label>
-          <SubmitButton text="Save changes" />
-        </Form>
+          {/* <Button className="w-full" disabled={pending} type="submit">
+            <Activity mode={pending ? "visible" : "hidden"}>
+              <Spinner />
+            </Activity>
+            <span>Save changes</span>
+          </Button> */}
+        </form>
       }
       control={{ onOpenChange: setIsOpen, open: isOpen }}
       title="Edit credentials"

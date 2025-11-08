@@ -1,20 +1,21 @@
-"use client"
-
+import { useRouter } from "@tanstack/react-router"
 import { ArrowLeft, ArrowRight } from "lucide-react"
-import { useRouter } from "next/navigation"
 
-import { Button } from "./ui/button"
-import { ButtonGroup } from "./ui/button-group"
+import { Button } from "@/components/ui/button"
+import { ButtonGroup } from "@/components/ui/button-group"
 
 function AppTopBarNavigation() {
   const router = useRouter()
 
+  const goBack = () => router.history.back()
+  const goForward = () => router.history.forward()
+
   return (
     <ButtonGroup>
-      <Button onClick={router.back} size="icon-lg" variant="outline">
+      <Button onClick={goBack} size="icon-lg" variant="outline">
         <ArrowLeft />
       </Button>
-      <Button onClick={router.forward} size="icon-lg" variant="outline">
+      <Button onClick={goForward} size="icon-lg" variant="outline">
         <ArrowRight />
       </Button>
     </ButtonGroup>

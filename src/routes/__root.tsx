@@ -1,9 +1,9 @@
 import { createRootRoute, type ErrorComponentProps, Link, Outlet } from "@tanstack/react-router"
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
 import { ServerCrash, StickyNote } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
+import { Toaster } from "@/components/ui/sonner"
 import { Spinner } from "@/components/ui/spinner"
 
 export const Route = createRootRoute({
@@ -60,8 +60,10 @@ function Pending() {
 function RootLayout() {
   return (
     <>
-      <Outlet />
-      <TanStackRouterDevtools />
+      <section className="h-dvh">
+        <Outlet />
+      </section>
+      <Toaster />
     </>
   )
 }
