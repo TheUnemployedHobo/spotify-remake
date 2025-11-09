@@ -5,5 +5,9 @@ export const Route = createFileRoute("/(base)/_layout/")({
 })
 
 function Index() {
-  return <>Hello pure react and f nextjs</>
+  return (
+    <>
+      <p>Hello pure react and f nextjs</p>
+    </>
+  )
 }

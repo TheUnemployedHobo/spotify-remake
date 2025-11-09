@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router"
+import { createFileRoute, Link, redirect, useNavigate } from "@tanstack/react-router"
 import { Activity, type FormEvent, useState } from "react"
 import { toast } from "sonner"
 
@@ -7,9 +7,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Spinner } from "@/components/ui/spinner"
+import { isAuthenticated } from "@/lib/utils"
 import { userSignUp } from "@/services/user.service"
 
 export const Route = createFileRoute("/(auth)/_layout/signup")({
+  beforeLoad() {
+    if (isAuthenticated()) throw redirect({ to: "/" })
+  },
   component: RouteComponent,
 })
 

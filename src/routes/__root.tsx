@@ -15,7 +15,7 @@ export const Route = createRootRoute({
 
 function Error({ error, reset }: ErrorComponentProps) {
   return (
-    <Empty className="flex h-full items-center justify-center">
+    <Empty className="flex h-dvh items-center justify-center">
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <ServerCrash />
@@ -32,7 +32,7 @@ function Error({ error, reset }: ErrorComponentProps) {
 
 function NotFound() {
   return (
-    <Empty className="flex h-full items-center justify-center">
+    <Empty className="flex h-dvh items-center justify-center">
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <StickyNote />
@@ -51,7 +51,7 @@ function NotFound() {
 
 function Pending() {
   return (
-    <div className="flex h-full items-center justify-center">
+    <div className="flex h-dvh items-center justify-center">
       <Spinner className="text-primary size-16" />
     </div>
   )
@@ -60,9 +60,7 @@ function Pending() {
 function RootLayout() {
   return (
     <>
-      <section className="h-dvh">
-        <Outlet />
-      </section>
+      <Outlet />
       <Toaster />
     </>
   )
