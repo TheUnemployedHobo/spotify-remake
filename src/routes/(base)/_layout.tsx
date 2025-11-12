@@ -1,10 +1,14 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router"
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router"
 
 import AppSidebarDesktop from "@/components/app-sidebar/app-sidebar-desktop"
 import AppSidebarMobile from "@/components/app-sidebar/app-sidebar-mobile"
 import AppTopBar from "@/components/app-topbar/app-topbar-index"
+import { isAuthenticated } from "@/lib/utils"
 
 export const Route = createFileRoute("/(base)/_layout")({
+  beforeLoad() {
+    if (!isAuthenticated()) throw redirect({ to: "/signin" })
+  },
   component: RouteComponent,
 })
 

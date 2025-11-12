@@ -1,4 +1,4 @@
-import { setToken } from "@/lib/utils"
+import { getToken, removeToken, setToken } from "@/lib/utils"
 
 const SERVER_BASE_URL = import.meta.env["VITE_SERVER_BASE_URL"]
 
@@ -29,6 +29,39 @@ export const userSignIn = async (f: FormData) => {
 
   const token = await response.text()
   setToken(token)
+
+  return true
+}
+
+export const userEditCredits = async (f: FormData) => {
+  const username = f.get("username") as string
+  const prevPassword = f.get("prevPassword") as string
+  const password = f.get("password") as string
+
+  if (!username && !prevPassword && !password) return
+
+  const response = await fetch(`${SERVER_BASE_URL}/api/users`, {
+    body: JSON.stringify({ password, prevPassword, username }),
+    headers: { authorization: getToken(), "Content-Type": "application/json" },
+    method: "PUT",
+  })
+
+  if (!response.ok) return false
+
+  removeToken()
+
+  return true
+}
+
+export const userDeleteAcc = async () => {
+  const response = await fetch(`${SERVER_BASE_URL}/api/users`, {
+    headers: { authorization: getToken() },
+    method: "DELETE",
+  })
+
+  if (!response.ok) return false
+
+  removeToken()
 
   return true
 }

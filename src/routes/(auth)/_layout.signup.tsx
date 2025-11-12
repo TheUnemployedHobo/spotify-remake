@@ -1,4 +1,4 @@
-import { createFileRoute, Link, redirect, useNavigate } from "@tanstack/react-router"
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router"
 import { Activity, type FormEvent, useState } from "react"
 import { toast } from "sonner"
 
@@ -7,18 +7,14 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Spinner } from "@/components/ui/spinner"
-import { isAuthenticated } from "@/lib/utils"
 import { userSignUp } from "@/services/user.service"
 
 export const Route = createFileRoute("/(auth)/_layout/signup")({
-  beforeLoad() {
-    if (isAuthenticated()) throw redirect({ to: "/" })
-  },
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const [pending, setPending] = useState(false)
+  const [isPending, setIsPending] = useState(false)
   const navigate = useNavigate()
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -28,18 +24,18 @@ function RouteComponent() {
     const password = form.get("password") as string
     const repass = form.get("repass") as string
 
-    setPending(true)
+    setIsPending(true)
     if (password !== repass) {
       toast.error("Passwords do not match")
-      setPending(false)
+      setIsPending(false)
     } else if (await userSignUp(form)) {
-      setPending(false)
+      setIsPending(false)
       toast.success("Signed up successfully")
       navigate({ to: "/signin" })
       return
     }
 
-    setPending(false)
+    setIsPending(false)
 
     toast.error("Failed to Sign up")
   }
@@ -64,8 +60,8 @@ function RouteComponent() {
             <span className="block">Confirm password</span>
             <Input minLength={8} name="repass" placeholder="admin1234" required type="password" />
           </Label>
-          <Button className="w-full" disabled={pending} type="submit">
-            <Activity mode={pending ? "visible" : "hidden"}>
+          <Button className="w-full" disabled={isPending} type="submit">
+            <Activity mode={isPending ? "visible" : "hidden"}>
               <Spinner />
             </Activity>
             <span>Sign up</span>
