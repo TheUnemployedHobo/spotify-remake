@@ -10,7 +10,7 @@ function PlaylistTable({ children }: PropsWithChildren) {
       <TableHeader>
         <TableRow>
           <TableHead className="pl-5">#</TableHead>
-          <TableHead>Title</TableHead>
+          <TableHead>Song</TableHead>
           <TableHead className="hidden sm:table-cell">Genre</TableHead>
           <TableHead>More</TableHead>
         </TableRow>

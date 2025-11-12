@@ -4,7 +4,7 @@ const appSidebarLinks = [
   { href: "/", Icon: House },
   { href: "/search", Icon: Compass },
   { href: "/playlists", Icon: ListMusic },
-  { href: "/liked", Icon: Heart },
+  { href: "/favorites", Icon: Heart },
 ]
 
 export default appSidebarLinks

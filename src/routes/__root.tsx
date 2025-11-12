@@ -1,4 +1,7 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { createRootRoute, type ErrorComponentProps, Link, Outlet } from "@tanstack/react-router"
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
 import { ServerCrash, StickyNote } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -57,11 +60,15 @@ function Pending() {
   )
 }
 
+const queryClient = new QueryClient()
+
 function RootLayout() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Outlet />
       <Toaster />
-    </>
+      <ReactQueryDevtools />
+      <TanStackRouterDevtools />
+    </QueryClientProvider>
   )
 }

@@ -1,12 +1,11 @@
 "use client"
 
 import { Ellipsis, Play } from "lucide-react"
-import Image from "next/image"
 import { Activity, useState } from "react"
 
-import { Button } from "./ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
-import { TableCell, TableRow } from "./ui/table"
+import { Button } from "../ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
+import { TableCell, TableRow } from "../ui/table"
 
 type PropsType = {
   artist: string
@@ -36,7 +35,7 @@ function PlaylistSong({ artist, genre, id, img, title }: PropsType) {
         </Activity>
       </TableCell>
       <TableCell className="flex items-center gap-x-2">
-        <Image alt="Nothing" className="rounded-xs" height={50} src={img} width={50} />
+        <img alt="Nothing" className="aspect-square size-10 rounded-xs" src={img} />
         <div className="flex flex-col">
           <span className="text-base font-medium">{title}</span>
           <span className="text-muted-foreground text-sm">{artist}</span>
@@ -51,9 +50,8 @@ function PlaylistSong({ artist, genre, id, img, title }: PropsType) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="rounded-xs">
-            <DropdownMenuItem>Go to artist</DropdownMenuItem>
-            <DropdownMenuItem>Remove</DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
+            <DropdownMenuItem variant="default">Go to artist</DropdownMenuItem>
+            <DropdownMenuItem variant="destructive">Remove</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </TableCell>
