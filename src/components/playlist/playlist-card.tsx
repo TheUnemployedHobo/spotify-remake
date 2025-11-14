@@ -1,7 +1,6 @@
-import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@tanstack/react-router"
 
-import { Item, ItemContent, ItemDescription, ItemHeader, ItemTitle } from "./ui/item"
+import { Item, ItemContent, ItemDescription, ItemHeader, ItemTitle } from "../ui/item"
 
 type PropsType = {
   cover: string
@@ -12,19 +11,13 @@ type PropsType = {
 
 function PlaylistCard({ cover, description, href, title }: PropsType) {
   return (
-    <Link href={href}>
+    <Link to={href}>
       <Item className="bg-muted rounded-[10px]" variant="outline">
         <ItemHeader>
-          <Image
-            alt={title}
-            className="aspect-square w-full rounded-xs object-cover"
-            height={128}
-            src={cover}
-            width={128}
-          />
+          <img alt={title} className="aspect-square w-full rounded-xs object-cover" src={cover} />
         </ItemHeader>
         <ItemContent>
-          <ItemTitle>{title}</ItemTitle>
+          <ItemTitle className="text-xl">{title}</ItemTitle>
           <ItemDescription className="capitalize">{description}</ItemDescription>
         </ItemContent>
       </Item>

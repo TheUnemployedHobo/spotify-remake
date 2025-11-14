@@ -20,7 +20,7 @@ function RouteComponent() {
         <div className="hidden sm:block">
           <AppSidebarDesktop />
         </div>
-        <div className="w-full p-5">
+        <div className="w-full px-5 pt-5">
           <Outlet />
         </div>
       </section>

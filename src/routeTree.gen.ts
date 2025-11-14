@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as baseLayoutRouteImport } from './routes/(base)/_layout'
 import { Route as authLayoutRouteImport } from './routes/(auth)/_layout'
 import { Route as baseLayoutIndexRouteImport } from './routes/(base)/_layout.index'
+import { Route as baseLayoutSearchRouteImport } from './routes/(base)/_layout.search'
 import { Route as baseLayoutFavoritesRouteImport } from './routes/(base)/_layout.favorites'
 import { Route as authLayoutSignupRouteImport } from './routes/(auth)/_layout.signup'
 import { Route as authLayoutSigninRouteImport } from './routes/(auth)/_layout.signin'
@@ -27,6 +28,11 @@ const authLayoutRoute = authLayoutRouteImport.update({
 const baseLayoutIndexRoute = baseLayoutIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => baseLayoutRoute,
+} as any)
+const baseLayoutSearchRoute = baseLayoutSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => baseLayoutRoute,
 } as any)
 const baseLayoutFavoritesRoute = baseLayoutFavoritesRouteImport.update({
@@ -49,12 +55,14 @@ export interface FileRoutesByFullPath {
   '/signin': typeof authLayoutSigninRoute
   '/signup': typeof authLayoutSignupRoute
   '/favorites': typeof baseLayoutFavoritesRoute
+  '/search': typeof baseLayoutSearchRoute
   '/': typeof baseLayoutIndexRoute
 }
 export interface FileRoutesByTo {
   '/signin': typeof authLayoutSigninRoute
   '/signup': typeof authLayoutSignupRoute
   '/favorites': typeof baseLayoutFavoritesRoute
+  '/search': typeof baseLayoutSearchRoute
   '/': typeof baseLayoutIndexRoute
 }
 export interface FileRoutesById {
@@ -64,13 +72,14 @@ export interface FileRoutesById {
   '/(auth)/_layout/signin': typeof authLayoutSigninRoute
   '/(auth)/_layout/signup': typeof authLayoutSignupRoute
   '/(base)/_layout/favorites': typeof baseLayoutFavoritesRoute
+  '/(base)/_layout/search': typeof baseLayoutSearchRoute
   '/(base)/_layout/': typeof baseLayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/signin' | '/signup' | '/favorites' | '/'
+  fullPaths: '/signin' | '/signup' | '/favorites' | '/search' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/signin' | '/signup' | '/favorites' | '/'
+  to: '/signin' | '/signup' | '/favorites' | '/search' | '/'
   id:
     | '__root__'
     | '/(auth)/_layout'
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/(auth)/_layout/signin'
     | '/(auth)/_layout/signup'
     | '/(base)/_layout/favorites'
+    | '/(base)/_layout/search'
     | '/(base)/_layout/'
   fileRoutesById: FileRoutesById
 }
@@ -107,6 +117,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof baseLayoutIndexRouteImport
+      parentRoute: typeof baseLayoutRoute
+    }
+    '/(base)/_layout/search': {
+      id: '/(base)/_layout/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof baseLayoutSearchRouteImport
       parentRoute: typeof baseLayoutRoute
     }
     '/(base)/_layout/favorites': {
@@ -149,11 +166,13 @@ const authLayoutRouteWithChildren = authLayoutRoute._addFileChildren(
 
 interface baseLayoutRouteChildren {
   baseLayoutFavoritesRoute: typeof baseLayoutFavoritesRoute
+  baseLayoutSearchRoute: typeof baseLayoutSearchRoute
   baseLayoutIndexRoute: typeof baseLayoutIndexRoute
 }
 
 const baseLayoutRouteChildren: baseLayoutRouteChildren = {
   baseLayoutFavoritesRoute: baseLayoutFavoritesRoute,
+  baseLayoutSearchRoute: baseLayoutSearchRoute,
   baseLayoutIndexRoute: baseLayoutIndexRoute,
 }
 

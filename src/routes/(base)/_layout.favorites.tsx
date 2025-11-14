@@ -5,22 +5,22 @@ import PlaylistHeader from "@/components/playlist/playlist-header"
 import PlaylistMidControl from "@/components/playlist/playlist-mid-control"
 import PlaylistSong from "@/components/playlist/playlist-song"
 import PlaylistTable from "@/components/playlist/playlist-table"
-import { getFavorites } from "@/services/song.service"
+import { favoriteGetAll } from "@/services/favorite.service"
 
 export const Route = createFileRoute("/(base)/_layout/favorites")({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { data } = useQuery({ queryFn: getFavorites, queryKey: ["favorites"] })
+  const { data } = useQuery({ queryFn: favoriteGetAll, queryKey: ["favorites"] })
 
   return (
     <>
-      <PlaylistHeader numberOfSongs={data!.length} playlistName="Favorites" playlistSubName="Playlist" />
+      <PlaylistHeader numberOfSongs={data?.length ?? 0} playlistName="Favorites" playlistSubName="Playlist" />
       <PlaylistMidControl />
       <PlaylistTable>
-        {data?.map(({ artist, genre, img, title }, i) => (
-          <PlaylistSong artist={artist} genre={genre} id={i} img={img} key={i} title={title} />
+        {data?.map(({ artist, genre, img, songId, title }, i) => (
+          <PlaylistSong artist={artist} genre={genre} id={songId} img={img} key={i} title={title} />
         ))}
       </PlaylistTable>
     </>

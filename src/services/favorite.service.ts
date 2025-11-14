@@ -2,7 +2,7 @@ import { getToken } from "@/lib/utils"
 
 const SERVER_BASE_URL = import.meta.env["VITE_SERVER_BASE_URL"]
 
-export const getFavorites = async () => {
+export const favoriteGetAll = async () => {
   const response = await fetch(`${SERVER_BASE_URL}/api/favorites`, {
     headers: { authorization: getToken() },
     method: "GET",
@@ -18,4 +18,16 @@ export const getFavorites = async () => {
       title: string
     }[]
   >
+}
+
+export const favoriteAddOrRemove = async (songId: number) => {
+  const response = await fetch(`${SERVER_BASE_URL}/api/favorites/${songId}`, {
+    headers: {
+      authorization: getToken(),
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+  })
+
+  return response.ok
 }

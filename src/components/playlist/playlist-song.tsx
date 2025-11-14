@@ -1,10 +1,11 @@
-"use client"
-
-import { Ellipsis, Play } from "lucide-react"
+import { useQueryClient } from "@tanstack/react-query"
+import { Play, Trash2 } from "lucide-react"
 import { Activity, useState } from "react"
+import { toast } from "sonner"
+
+import { favoriteAddOrRemove } from "@/services/favorite.service"
 
 import { Button } from "../ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { TableCell, TableRow } from "../ui/table"
 
 type PropsType = {
@@ -17,6 +18,14 @@ type PropsType = {
 
 function PlaylistSong({ artist, genre, id, img, title }: PropsType) {
   const [isHovered, setIsHovered] = useState(false)
+  const queryClient = useQueryClient()
+
+  const handleDelete = async () => {
+    if (await favoriteAddOrRemove(id)) {
+      queryClient.invalidateQueries({ queryKey: ["favorites"] })
+      toast.warning("Song removed from your favorites.")
+    } else toast.error("Failed to update favorites.")
+  }
 
   return (
     <TableRow
@@ -24,9 +33,9 @@ function PlaylistSong({ artist, genre, id, img, title }: PropsType) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <TableCell>
+      <TableCell className="w-20 text-center">
         <Activity mode={isHovered ? "hidden" : "visible"}>
-          <span className="p-3">{id + 1}</span>
+          <span>{id + 1}</span>
         </Activity>
         <Activity mode={isHovered ? "visible" : "hidden"}>
           <Button size="icon-sm" variant="ghost">
@@ -43,17 +52,9 @@ function PlaylistSong({ artist, genre, id, img, title }: PropsType) {
       </TableCell>
       <TableCell className="hidden capitalize sm:table-cell">{genre}</TableCell>
       <TableCell>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button size="icon-lg" variant="ghost">
-              <Ellipsis />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="rounded-xs">
-            <DropdownMenuItem variant="default">Go to artist</DropdownMenuItem>
-            <DropdownMenuItem variant="destructive">Remove</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Button onClick={handleDelete} size="icon-lg" variant="ghost">
+          <Trash2 />
+        </Button>
       </TableCell>
     </TableRow>
   )
