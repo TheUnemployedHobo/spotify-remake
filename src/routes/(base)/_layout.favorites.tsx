@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
 
-import PlaylistHeader from "@/components/playlist/playlist-header"
-import PlaylistMidControl from "@/components/playlist/playlist-mid-control"
-import PlaylistSong from "@/components/playlist/playlist-song"
-import PlaylistTable from "@/components/playlist/playlist-table"
+import PlaylistHeader from "@/components/playlist-header"
+import PlaylistMidControl from "@/components/playlist-mid-control"
+import PlaylistSong from "@/components/playlist-song"
+import PlaylistTable from "@/components/playlist-table"
 import { favoriteGetAll } from "@/services/favorite.service"
 
 export const Route = createFileRoute("/(base)/_layout/favorites")({

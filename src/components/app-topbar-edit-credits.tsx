@@ -3,16 +3,16 @@ import { UserPen } from "lucide-react"
 import { Activity, type FormEvent, useState } from "react"
 import { toast } from "sonner"
 
-import RegularDialog from "@/components/dialogs/regular-dialog"
+import RegularDialog from "@/components/regular-dialog"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { userEditCredits } from "@/services/user.service"
 
-import { Button } from "../ui/button"
-import { Spinner } from "../ui/spinner"
+import { Button } from "./ui/button"
+import { Spinner } from "./ui/spinner"
 
-function TopBarEditCredits() {
+function AppTopBarEditCredits() {
   const [isPending, setIsPending] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
@@ -69,4 +69,4 @@ function TopBarEditCredits() {
   )
 }
 
-export default TopBarEditCredits
+export default AppTopBarEditCredits

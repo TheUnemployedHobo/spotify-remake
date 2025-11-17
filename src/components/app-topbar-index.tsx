@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router"
 
-import AppLogo from "../others/app-logo"
+import AppLogo from "./app-logo"
+import AppTopBarSettings from "./app-topbar-settings"
 import AppTopBarThemeSwitcher from "./app-topbar-theme-switcher"
-import AppTopBarSettings from "./topbar-settings-index"
 
 function AppTopBar() {
   return (

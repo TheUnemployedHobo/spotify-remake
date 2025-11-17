@@ -2,11 +2,11 @@ import { useNavigate } from "@tanstack/react-router"
 import { LogOut } from "lucide-react"
 import { toast } from "sonner"
 
-import AlertDialog from "@/components/dialogs/alert-dialog"
+import AlertDialog from "@/components/alert-dialog"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { removeToken } from "@/lib/utils"
 
-function TopBarSignOut() {
+function AppTopBarSignOut() {
   const navigate = useNavigate()
 
   const handleAction = async () => {
@@ -29,4 +29,4 @@ function TopBarSignOut() {
   )
 }
 
-export default TopBarSignOut
+export default AppTopBarSignOut

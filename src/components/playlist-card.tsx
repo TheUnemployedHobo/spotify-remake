@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router"
 
-import { Item, ItemContent, ItemDescription, ItemHeader, ItemTitle } from "../ui/item"
+import { Item, ItemContent, ItemDescription, ItemHeader, ItemTitle } from "./ui/item"
 
 type PropsType = {
   cover: string

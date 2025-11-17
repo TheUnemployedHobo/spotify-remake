@@ -7,9 +7,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import TopBarDeleteAccount from "./topbar-delete-acc"
-import TopBarEditCredits from "./topbar-edit-credits"
-import TopBarSignOut from "./topbar-sign-out"
+import AppTopBarDeleteAccount from "./app-topbar-delete-acc"
+import AppTopBarEditCredits from "./app-topbar-edit-credits"
+import AppTopBarSignOut from "./app-topbar-sign-out"
 
 function AppTopBarSettings() {
   return (
@@ -22,9 +22,9 @@ function AppTopBarSettings() {
       <DropdownMenuContent className="rounded-xs">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <TopBarEditCredits />
-        <TopBarDeleteAccount />
-        <TopBarSignOut />
+        <AppTopBarEditCredits />
+        <AppTopBarDeleteAccount />
+        <AppTopBarSignOut />
       </DropdownMenuContent>
     </DropdownMenu>
   )

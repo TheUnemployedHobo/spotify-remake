@@ -1,8 +1,8 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router"
 
-import AppSidebarDesktop from "@/components/app-sidebar/app-sidebar-desktop"
-import AppSidebarMobile from "@/components/app-sidebar/app-sidebar-mobile"
-import AppTopBar from "@/components/app-topbar/app-topbar-index"
+import AppSidebarDesktop from "@/components/app-sidebar-desktop"
+import AppSidebarMobile from "@/components/app-sidebar-mobile"
+import AppTopBar from "@/components/app-topbar-index"
 import { isAuthenticated } from "@/lib/utils"
 
 export const Route = createFileRoute("/(base)/_layout")({

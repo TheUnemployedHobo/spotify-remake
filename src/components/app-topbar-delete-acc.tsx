@@ -2,11 +2,11 @@ import { useNavigate } from "@tanstack/react-router"
 import { UserMinus } from "lucide-react"
 import { toast } from "sonner"
 
-import AlertDialog from "@/components/dialogs/alert-dialog"
+import AlertDialog from "@/components/alert-dialog"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { userDeleteAcc } from "@/services/user.service"
 
-function TopBarDeleteAccount() {
+function AppTopBarDeleteAccount() {
   const navigate = useNavigate()
 
   const handleAction = async () => {
@@ -32,4 +32,4 @@ function TopBarDeleteAccount() {
   )
 }
 
-export default TopBarDeleteAccount
+export default AppTopBarDeleteAccount

@@ -1,11 +1,11 @@
-import { Skeleton } from "../ui/skeleton"
+import { Skeleton } from "./ui/skeleton"
 
 type PropsType = {
   mode: "Playlist Card" | "Playlist Song"
   numberOfItems: number
 }
 
-function Placeholder({ mode, numberOfItems }: PropsType) {
+function PlaylistPlaceholder({ mode, numberOfItems }: PropsType) {
   if (mode === "Playlist Card")
     return Array.from({ length: numberOfItems }, (_, i) => (
       <div className="flex flex-col gap-y-2" key={i}>
@@ -31,4 +31,4 @@ function Placeholder({ mode, numberOfItems }: PropsType) {
     )
 }
 
-export default Placeholder
+export default PlaylistPlaceholder

@@ -5,8 +5,8 @@ import { toast } from "sonner"
 
 import { favoriteAddOrRemove } from "@/services/favorite.service"
 
-import { Button } from "../ui/button"
-import { TableCell, TableRow } from "../ui/table"
+import { Button } from "./ui/button"
+import { TableCell, TableRow } from "./ui/table"
 
 type PropsType = {
   artist: string

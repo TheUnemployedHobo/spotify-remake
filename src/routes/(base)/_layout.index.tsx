@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
 import { Activity } from "react"
 
-import Placeholder from "@/components/others/placeholder"
-import PlaylistCard from "@/components/playlist/playlist-card"
+import PlaylistCard from "@/components/playlist-card"
+import Placeholder from "@/components/playlist-placeholder"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { artistGetAll } from "@/services/artist.service"
 
