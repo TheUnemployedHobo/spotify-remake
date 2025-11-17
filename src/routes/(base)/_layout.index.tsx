@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
+import { Activity } from "react"
 
+import Placeholder from "@/components/others/placeholder"
 import PlaylistCard from "@/components/playlist/playlist-card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { artistGetAll } from "@/services/artist.service"
@@ -10,16 +12,22 @@ export const Route = createFileRoute("/(base)/_layout/")({
 })
 
 function Index() {
-  const { data } = useQuery({ queryFn: artistGetAll, queryKey: ["artists"] })
+  const { data, isPending } = useQuery({ queryFn: artistGetAll, queryKey: ["artists"] })
 
   return (
     <>
       <h1 className="mb-5 text-4xl font-bold">Available artists</h1>
       <ScrollArea className="h-[calc(100dvh-176px)]">
         <section className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4">
-          {data?.map(({ cover, genreName, name }, i) => (
-            <PlaylistCard cover={cover} description={genreName} href="/" key={i} title={name} />
-          ))}
+          <Activity mode={isPending ? "hidden" : "visible"}>
+            {!isPending &&
+              data?.map(({ cover, genreName, name }, i) => (
+                <PlaylistCard cover={cover} description={genreName} href="/" key={i} title={name} />
+              ))}
+          </Activity>
+          <Activity mode={isPending ? "visible" : "hidden"}>
+            <Placeholder mode="Playlist Card" numberOfItems={8} />
+          </Activity>
         </section>
       </ScrollArea>
     </>
