@@ -4,6 +4,7 @@ import { Activity } from "react"
 
 import PlaylistCard from "@/components/playlist-card"
 import Placeholder from "@/components/playlist-placeholder"
+import { ItemGroup } from "@/components/ui/item"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { artistGetAll } from "@/services/artist.service"
 
@@ -18,7 +19,7 @@ function Index() {
     <>
       <h1 className="mb-5 text-4xl font-bold">Available artists</h1>
       <ScrollArea className="h-[calc(100dvh-176px)]">
-        <section className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4">
+        <ItemGroup className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4">
           <Activity mode={isPending ? "hidden" : "visible"}>
             {!isPending &&
               data?.map(({ cover, genreName, name }, i) => (
@@ -28,7 +29,7 @@ function Index() {
           <Activity mode={isPending ? "visible" : "hidden"}>
             <Placeholder mode="Playlist Card" numberOfItems={8} />
           </Activity>
-        </section>
+        </ItemGroup>
       </ScrollArea>
     </>
   )

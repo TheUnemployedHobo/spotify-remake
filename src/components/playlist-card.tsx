@@ -12,7 +12,7 @@ type PropsType = {
 function PlaylistCard({ cover, description, href, title }: PropsType) {
   return (
     <Link to={href}>
-      <Item className="bg-muted rounded-[10px]" variant="outline">
+      <Item className="bg-muted rounded-xs" variant="outline">
         <ItemHeader>
           <img alt={title} className="aspect-square w-full rounded-xs object-cover" src={cover} />
         </ItemHeader>
